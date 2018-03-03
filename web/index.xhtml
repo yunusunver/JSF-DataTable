@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+        <table>
+            <tr>
+                <td>Numarasi:</td>
+                <td><h:inputText value="#{yb.numarasi}" size="25"/></td>
+            </tr>
+            <tr>
+                <td>Adı Soyadı:</td>
+                <td><h:inputText value="#{yb.adiSoyadi}" size="25"/></td>
+            </tr>
+            <tr>
+                <td>Yaşı:</td>
+                <td><h:inputText value="#{yb.yasi}" size="25"/></td>
+            </tr>
+            <tr>
+                <td>Maaşı:</td>
+                <td><h:inputText value="#{yb.maasi}" size="25"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><h:commandButton value="Ekle" action="#{yb.kayitEkle()}"/></td>
+            </tr>
+            
+            
+        </table>
+      
+        <h:dataTable value="#{yb.personelListesi}" var="p">
+            <h:column>
+                <f:facet name="header">Numarası</f:facet>
+               
+                <h:inputText value="#{p.numarasi}" size="10" rendered="#{p.duzenle}"/>
+                <h:outputText value="#{p.numarasi}"  rendered="#{not p.duzenle}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">
+                    <h:commandLink  action="#{yb.siralaPersonelAdiSoyadi()}">
+                     Adı
+                    </h:commandLink>
+                </f:facet>
+                <h:inputText value="#{p.adiSoyadi}" size="10" rendered="#{p.duzenle}"/>
+                <h:outputText value="#{p.adiSoyadi}" rendered="#{not p.duzenle}"/>
+                
+            </h:column>
+            <h:column>
+                <f:facet name="header">Yaşı</f:facet>
+                <h:inputText value="#{p.yasi}" size="10" rendered="#{p.duzenle}"/>
+                <h:outputText value="#{p.yasi}" rendered="#{not p.duzenle}"/>
+              
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Maaşı</f:facet>
+                <h:inputText value="#{p.maasi}" size="10" rendered="#{p.duzenle}"/>
+                <h:outputText value="#{p.maasi}" rendered="#{not p.duzenle}"/>
+                
+            </h:column>
+            <h:column>
+                <f:facet name="header">Sil</f:facet>
+                <h:commandLink value="Sil" action="#{yb.kayitSil(p)}" rendered="#{not p.duzenle}"/>
+            </h:column>
+            <h:column>
+                <h:commandLink value="Duzenle" action="#{yb.kayitDuzenle(p)}" rendered="#{not p.duzenle}"/>
+                
+                <h:commandButton value="Degisikigi Kaydet" action="#{yb.degisikligiKaydet()}" rendered="#{p.duzenle}"/>
+            </h:column>
+        </h:dataTable>
+            </h:form>
+    </h:body>
+</html>
+
